@@ -58,7 +58,7 @@ package("opencv")
     for _, feature in ipairs(features) do
         add_configs(feature, {description = "Include " .. feature .. " support.", default = opencv_is_default(feature), type = "boolean"})
     end
-    add_configs("blas", {description = "Set BLAS vendor.", default = nil, type = "string", values = {"mkl", "openblas"}})
+    add_configs("blas", {description = "Set BLAS vendor.", values = {"mkl", "openblas"}})
     add_configs("cuda", {description = "Enable CUDA support.", default = false, type = "boolean"})
     add_configs("dynamic_parallel", {description = "Dynamically load parallel runtime (TBB etc.).", default = false, type = "boolean"})
 
@@ -191,6 +191,7 @@ package("opencv")
             end
             package:addenv("PATH", "bin")
         end
+        print(os.files(path.join(package:installdir("lib"), "**")))
     end)
 
     on_test(function (package)
