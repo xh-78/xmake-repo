@@ -176,7 +176,9 @@ package("opencv")
             local arch = package:is_arch("x86_64") and "x64" or "x86"
             local linkdir = (package:config("shared") and "lib" or "staticlib")
             for _, f in ipairs(os.files(path.join(arch, "mingw", linkdir, "lib*.a"))) do
+                print("f", f)
                 if not f:match("libopencv_.+") then
+                    print("match", f, path.basename(f):match("lib(.+)"))
                     package:add("links", path.basename(f):match("lib(.+)"))
                 end
             end
@@ -191,7 +193,7 @@ package("opencv")
             end
             package:addenv("PATH", "bin")
         end
-        print(os.files(path.join(package:installdir(), "**")))
+        print("links", package:get("links"))
     end)
 
     on_test(function (package)
