@@ -175,7 +175,7 @@ package("opencv")
         elseif package:is_plat("mingw") then
             local arch = package:is_arch("x86_64") and "x64" or "x86"
             local linkdir = (package:config("shared") and "lib" or "staticlib")
-            for _, f in ipairs(os.files(path.join(installdir, arch, "mingw", linkdir, "lib*.a"))) do
+            for _, f in ipairs(os.files(path.join(package:installdir(), arch, "mingw", linkdir, "lib*.a"))) do
                 print("f", f)
                 if not f:match("libopencv_.+") then
                     print("match", f, path.basename(f):match("lib(.+)"))
