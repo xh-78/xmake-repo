@@ -191,7 +191,7 @@ package("opencv")
             end
             package:addenv("PATH", "bin")
         end
-        print(os.files(path.join(package:installdir("lib"), "**")))
+        print(os.files(path.join(package:installdir(), "**")))
     end)
 
     on_test(function (package)
